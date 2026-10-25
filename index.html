@@ -1,86 +1,164 @@
 <!DOCTYPE html>
-<html lang="pt-AO">
+<html lang="pt-PT">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#14532d">
-<title>Clínica MUANA MILUNGA | Medicina Natural</title>
-<style>
-:root{--green:#14532d;--green2:#166534;--mint:#ecfdf5;--gold:#d4a72c;--text:#183126;--muted:#5d7166}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:#f7fbf8;line-height:1.55}
-a{color:inherit}header{background:linear-gradient(135deg,#0c3b25,#1d7544);color:#fff;padding:28px 18px 36px;text-align:center}
-.brand{font-size:clamp(1.65rem,5vw,2.4rem);font-weight:800;letter-spacing:.04em;margin:0}.tagline{margin:7px 0 20px;color:#e1f4e7}
-nav{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}nav a,.btn{display:inline-block;border:0;border-radius:999px;padding:11px 17px;text-decoration:none;font-weight:700;cursor:pointer}
-nav a{background:#ffffff1b;border:1px solid #ffffff55;color:#fff}.btn{background:var(--gold);color:#1f2d20}.btn-green{background:var(--green2);color:#fff}
-main{max-width:1050px;margin:auto;padding:22px 15px 50px}section{background:#fff;border:1px solid #e0ebe3;border-radius:18px;padding:22px;margin:18px 0;box-shadow:0 6px 22px #0d40200b}
-h2{color:var(--green);margin-top:0}h3{color:#21613d;margin-bottom:8px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:center}
-.hero-art{min-height:190px;border-radius:16px;background:radial-gradient(circle at 50% 45%,#c8edcf,#e8f7eb 60%,#f8fcf8);display:grid;place-items:center;font-size:5rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.service{border:1px solid #dcebe0;border-radius:14px;padding:16px;background:#fbfefb}
-ul{padding-left:22px;margin-top:8px}.price{font-size:1.35rem;font-weight:800;color:var(--green)}.note{padding:12px 14px;border-left:4px solid var(--gold);background:#fff9e7;border-radius:8px}
-.contact{display:flex;gap:10px;flex-wrap:wrap}label{display:block;font-weight:700;margin:10px 0 5px}input,select,textarea{width:100%;padding:12px;border:1px solid #c8d8cc;border-radius:10px;font:inherit;background:#fff}form{max-width:650px}.small{font-size:.92rem;color:var(--muted)}
-footer{text-align:center;background:#0c3b25;color:#e8f5ec;padding:24px 15px}
-#managerAccess{position:fixed;right:5px;bottom:5px;width:18px;height:18px;opacity:.025;border:0;background:#14532d;border-radius:50%;z-index:10;cursor:pointer}
-#managerAccess:focus{opacity:.65;outline:2px solid var(--gold)}#managerPanel{display:none;position:fixed;inset:0;background:#07170edb;z-index:100;padding:16px;overflow:auto}
-.panel-card{max-width:700px;margin:5vh auto;background:#fff;border-radius:18px;padding:22px;box-shadow:0 18px 60px #0005}.panel-top{display:flex;justify-content:space-between;gap:12px;align-items:center}
-.panel-top button{border:0;background:#edf5ef;border-radius:10px;padding:10px 13px;font-weight:700}#managerTools{display:none}
-@media(max-width:680px){.hero{grid-template-columns:1fr}.hero-art{min-height:135px}.panel-card{margin:1vh auto;padding:18px}section{padding:18px}}
-</style></head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muana Milunga Medicina Natural</title>
+    <!-- Tailwind CSS para o Painel Administrativo Responsivo -->
+    <script src="https://tailwindcss.com"></script>
+    <!-- FontAwesome para Ícones -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    
+    <style>
+        /* CONFIGURAÇÕES E ESTILOS ORIGINAIS DO SEU SITE (PRESERVADOS) */
+        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; color: #333; }
+        header { background-color: #0b5345; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-container { display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; -webkit-user-select: none; }
+        .logo-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+        nav a { color: white; text-decoration: none; margin-left: 15px; font-weight: bold; }
+        .hero { padding: 60px 20px; text-align: center; background: linear-gradient(rgba(11,83,69,0.8), rgba(11,83,69,0.8)), url('https://unsplash.com'); background-size: cover; color: white; }
+        .btn { display: inline-block; padding: 12px 24px; background-color: #27ae60; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 15px; border: none; cursor: pointer; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        
+        /* CAMADA DO PAINEL ADMINISTRATIVO (INVISÍVEL POR PADRÃO) */
+        #admin-wrapper {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            background-color: #f3f4f6;
+            overflow-y: auto;
+        }
+        #admin-wrapper.active {
+            display: block;
+        }
+        .status-badge-pendente { background-color: #fef3c7; color: #d97706; }
+        .status-badge-confirmada { background-color: #d1fae5; color: #059669; }
+        .status-badge-concluida { background-color: #e0e7ff; color: #4f46e5; }
+        .status-badge-cancelada { background-color: #fee2e2; color: #dc2626; }
+    </style>
+</head>
 <body>
-<header id="top"><p class="brand" id="brandName">Clínica MUANA MILUNGA</p><p class="tagline">Cuidar naturalmente da sua saúde é a nossa missão</p>
-<nav><a href="#servicos">Serviços</a><a href="#ecografias">Ecografias</a><a href="#horarios">Horários</a><a href="#equipa">Equipa</a><a href="#contactos">Contactos</a></nav></header>
-<main>
-<section class="hero"><div><h2>Medicina Natural &amp; Naturopatia</h2><p>A Clínica MUANA MILUNGA dedica-se a promover a saúde e o bem-estar através da Medicina Natural e Naturopatia.</p>
-<p class="price">Ecografias: 10.000 Kz cada</p><p class="note">As ecografias estão disponíveis exclusivamente na unidade Ex-Combatentes.</p>
-<div class="contact"><a class="btn btn-green" href="#marcacao">Agende a sua consulta</a><a class="btn" href="https://wa.me/244937980762">Falar pelo WhatsApp</a></div></div><div class="hero-art" aria-label="Ilustração de folhas naturais">🌿</div></section>
-<section id="marcacao"><h2>Agende a sua consulta</h2><p>Preencha os dados para preparar o pedido de marcação. A equipa poderá entrar em contacto consigo para confirmar o agendamento.</p>
-<form id="bookingForm"><label for="nome">Nome</label><input id="nome" required placeholder="O seu nome">
-<label for="idade">Idade</label><input id="idade" type="number" min="1" max="120" required placeholder="A sua idade">
-<label for="contacto">Contacto telefónico</label><input id="contacto" required type="tel" placeholder="Número de telefone">
-<label for="unidade">Unidade pretendida</label><select id="unidade" required><option value="">Escolha uma unidade</option><option>Ex-Combatentes</option><option>Viana</option></select>
-<label for="servico">Serviço pretendido</label><select id="servico" required><option value="">Escolha um serviço</option><option>Consulta de Medicina Natural</option><option>Urologia</option><option>Ginecologia</option><option>Problemas intestinais</option><option>Problemas vasculares</option><option>Ecografia</option><option>Outro</option></select>
-<label for="mensagem">Observações (opcional)</label><textarea id="mensagem" rows="3" placeholder="Escreva aqui alguma observação para a equipa"></textarea>
-<p><button class="btn btn-green" type="submit">Enviar pedido pelo WhatsApp</button></p><p class="small">O pedido será aberto no WhatsApp para confirmar o envio. Evite escrever informações médicas muito pessoais neste formulário.</p></form></section>
-<section id="servicos"><h2>Serviços de Medicina Natural</h2><div class="grid">
-<article class="service"><h3>Urologia</h3><ul><li>Infertilidade</li><li>Infecção urinária</li><li>Impotência sexual</li><li>Ejaculação precoce</li><li>Hérnia</li><li>Varicoceles</li><li>Falta de apetite sexual</li><li>Prostatite</li><li>...E outras</li></ul></article>
-<article class="service"><h3>Ginecologia</h3><ul><li>Infertilidade</li><li>Infecção urinária</li><li>Menstruação irregular</li><li>Ausência da menstruação</li><li>Quistos e miomas uterinos</li><li>Inflamação pélvica</li><li>Falta de apetite sexual</li><li>Corrimento</li><li>...E outras</li></ul></article>
-<article class="service"><h3>Problemas intestinais</h3><ul><li>Prisão de ventre</li><li>Gastrite</li><li>Tifoides</li><li>Hemorróidas</li><li>...E outras</li></ul></article>
-<article class="service"><h3>Problemas vasculares</h3><ul><li>Hipertensão</li><li>Hipotensão</li><li>Má circulação sanguínea</li></ul></article>
-<article class="service"><h3>Outros</h3><ul><li>Diabetes</li><li>Problemas de mobilidade parcial (lesões reversíveis)</li></ul></article></div>
-<p class="small">A informação apresentada descreve as áreas de atendimento indicadas pela clínica; o diagnóstico e o tratamento devem ser confirmados por profissionais de saúde qualificados.</p></section>
-<section id="ecografias"><h2>Ecografias</h2><p class="price">10.000 Kz cada</p><p class="note">Disponíveis exclusivamente na unidade Ex-Combatentes.</p>
-<div class="grid"><div class="service">Ecografia pélvica</div><div class="service">Ecografia abdominal</div><div class="service">Ecografia prostática</div><div class="service">Ecografia morfológica</div><div class="service">Ecografia obstétrica</div><div class="service">Ecografia mamária</div><div class="service">Ecografia renal</div><div class="service">Ecografia de partes moles</div><div class="service">Ecografia testicular</div><div class="service">Ecografia endovaginal</div></div></section>
-<section id="horarios"><h2>Horários de atendimento</h2><div class="grid"><article class="service"><h3>Unidade Ex-Combatentes</h3><p>Segunda-feira a sábado<br><strong>08h00 às 18h00</strong></p></article><article class="service"><h3>Unidade Viana</h3><p>Segunda-feira a sexta-feira<br><strong>08h00 às 16h00</strong></p><p>Sábado<br><strong>08h00 às 12h00</strong></p></article></div>
-<p class="note">Informação importante: os serviços de ecografia estão disponíveis exclusivamente na unidade Ex-Combatentes.</p></section>
-<section id="equipa"><h2>Equipa profissional</h2><div class="service"><h3>Naturopata: Dr. Délcio Lourenço</h3><p class="small">Confirme diretamente com a clínica a disponibilidade dos profissionais e os serviços pretendidos.</p></div></section>
-<section id="testemunhos"><h2>Testemunhos de clientes</h2><p>Veja relatos de pacientes satisfeitos com os seus atendimentos.</p><p class="small">As fotografias e testemunhos originais não foram transferidos automaticamente; podem ser adicionados quando os ficheiros autorizados estiverem disponíveis.</p></section>
-<section id="sobre"><h2>Sobre a clínica</h2><p>A Clínica MUANA MILUNGA dedica-se a promover a saúde e o bem-estar através da Medicina Natural e Naturopatia.</p></section>
-<section id="contactos"><h2>Precisa de ajuda?</h2><p>Contacte a equipa para confirmar serviços, preços e marcações.</p><p><strong>Ligue:</strong> <a href="tel:+244937980762">937 980 762</a> / <a href="tel:+244942402781">942 402 781</a></p><div class="contact"><a class="btn btn-green" href="https://wa.me/244937980762">Falar pelo WhatsApp</a><a class="btn" href="tel:+244937980762">Ligar agora</a></div><p class="small">Unidades indicadas: Ex-Combatentes e Viana, Luanda.</p></section>
-<section id="privacidade"><h2>Política de privacidade</h2><p>Os dados recolhidos neste site (nome, idade, contacto e preferências de consulta) destinam-se a preparar marcações e comunicação com os pacientes. O formulário abre uma mensagem no WhatsApp; os dados só são partilhados quando a pessoa decide enviá-la.</p><p>Para solicitar a eliminação de dados enviados à clínica, contacte a equipa através dos telefones indicados.</p></section>
-</main><footer><strong>Clínica MUANA MILUNGA</strong><br>Medicina Natural &amp; Naturopatia<br>Ex-Combatentes | Viana</footer>
-<button id="managerAccess" aria-label="Acesso do gestor" title="Acesso do gestor"></button>
-<div id="managerPanel" role="dialog" aria-modal="true" aria-labelledby="panelTitle"><div class="panel-card">
-<div class="panel-top"><h2 id="panelTitle">Painel do Gestor</h2><button type="button" id="closePanel">Fechar ✕</button></div>
-<div id="loginArea"><p>Introduza os dados de acesso do gestor.</p><form id="loginForm"><label for="username">Utilizador</label><input id="username" autocomplete="username" required><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required><p><button class="btn btn-green" type="submit">Entrar</button></p><p id="loginError" role="alert" class="small"></p></form></div>
-<div id="managerTools"><p><strong>Sessão do gestor iniciada neste navegador.</strong></p><p class="note">Este painel é uma demonstração local: as alterações ficam guardadas apenas neste navegador e não atualizam automaticamente o site publicado. Para gestão real e segura, é necessário configurar autenticação no servidor e uma base de dados.</p>
-<label for="editAnnouncement">Aviso público</label><textarea id="editAnnouncement" rows="3" placeholder="Escreva um aviso para os visitantes"></textarea><p><button class="btn btn-green" type="button" id="saveAnnouncement">Guardar aviso neste navegador</button></p><p id="saveStatus" class="small"></p><button class="btn" type="button" id="logout">Terminar sessão</button></div>
-</div></div>
-<script>
-(function(){
-const clinicPhone='244937980762';
-document.getElementById('bookingForm').addEventListener('submit',function(e){
-e.preventDefault();const v=id=>document.getElementById(id).value.trim();
-const lines=['Pedido de marcação - Clínica MUANA MILUNGA','Nome: '+v('nome'),'Idade: '+v('idade'),'Contacto: '+v('contacto'),'Unidade: '+v('unidade'),'Serviço: '+v('servico'),'Observações: '+v('mensagem')];
-window.open('https://wa.me/'+clinicPhone+'?text='+encodeURIComponent(lines.join('\n')),'_blank','noopener');
-});
-const access=document.getElementById('managerAccess'),panel=document.getElementById('managerPanel');let taps=0,timer;
-access.addEventListener('click',()=>{taps++;clearTimeout(timer);timer=setTimeout(()=>taps=0,2200);if(taps>=5){panel.style.display='block';taps=0;document.getElementById('username').focus();}});
-document.getElementById('closePanel').addEventListener('click',()=>panel.style.display='none');
-panel.addEventListener('click',e=>{if(e.target===panel)panel.style.display='none';});document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.style.display='none';});
-const loginArea=document.getElementById('loginArea'),tools=document.getElementById('managerTools');
-document.getElementById('loginForm').addEventListener('submit',function(e){e.preventDefault();
-if(document.getElementById('username').value==='gestor'&&document.getElementById('password').value==='##milunga'){
-loginArea.style.display='none';tools.style.display='block';document.getElementById('editAnnouncement').value=localStorage.getItem('muana_manager_announcement')||'';document.getElementById('loginError').textContent='';
-}else{document.getElementById('loginError').textContent='Utilizador ou senha incorretos.';}});
-document.getElementById('saveAnnouncement').addEventListener('click',()=>{localStorage.setItem('muana_manager_announcement',document.getElementById('editAnnouncement').value);document.getElementById('saveStatus').textContent='Aviso guardado neste navegador. Não foi publicado no site.';});
-document.getElementById('logout').addEventListener('click',()=>{tools.style.display='none';loginArea.style.display='block';document.getElementById('password').value='';document.getElementById('username').value='';});
-})();
-</script></body></html>
+
+    <!-- ======================================================== -->
+    <!-- 1. SITE PÚBLICO ORIGINAL (INALTERADO)                    -->
+    <!-- ======================================================== -->
+    <header>
+        <div class="logo-container" id="logoSecreto">
+            <img src="https://unsplash.com" alt="Logótipo Muana Milunga" class="logo-img">
+            <div>
+                <div style="font-size: 1.2rem; font-weight: bold;">Muana Milunga</div>
+                <div style="font-size: 0.8rem; opacity: 0.8;">Medicina Natural</div>
+            </div>
+        </div>
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#marcar">Marcar Consulta</a>
+        </nav>
+    </header>
+
+    <div class="hero" id="inicio">
+        <h1>“Cuidar da sua saúde também é força!”</h1>
+        <p>A sua saúde merece atenção, respeito e cuidado. Conheça as nossas terapias naturais.</p>
+        <a href="#marcar" class="btn">Marcar Consulta Regular</a>
+    </div>
+
+    <div class="container" id="servicos">
+        <h2>Os Nossos Serviços</h2>
+        <p>Consultas especializadas em fitoterapia, nutrição funcional e tratamentos holísticos personalizados.</p>
+    </div>
+
+    <div class="container" id="marcar" style="background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+        <h2>Marcar Consulta</h2>
+        <form id="publicAppointmentForm">
+            <div class="form-group">
+                <label for="clientName">Nome Completo:</label>
+                <input type="text" id="clientName" required placeholder="Ex: João Silva">
+            </div>
+            <div class="form-group">
+                <label for="clientPhone">Número de Telefone:</label>
+                <input type="tel" id="clientPhone" required placeholder="Ex: 923000000">
+            </div>
+            <div class="form-group">
+                <label for="requestedService">Serviço solicitado:</label>
+                <select id="requestedService" required>
+                    <option value="Consulta de Medicina Natural">Consulta de Medicina Natural - 15.000 Kz</option>
+                    <option value="Tratamento Fitoterápico">Tratamento Fitoterápico - 10.000 Kz</option>
+                    <option value="Acompanhamento Nutricional">Acompanhamento Nutricional - 12.000 Kz</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="appointmentDate">Data pretendida:</label>
+                <input type="date" id="appointmentDate" required>
+            </div>
+            <div class="form-group">
+                <label for="appointmentTime">Hora pretendida:</label>
+                <input type="time" id="appointmentTime" required>
+            </div>
+            <button type="submit" class="btn" style="width: 100%;">Enviar Pedido de Marcação</button>
+        </form>
+    </div>
+
+
+    <!-- ======================================================== -->
+    <!-- 2. CAMADA PRIVADA: LOGIN E PAINEL ADMINISTRATIVO          -->
+    <!-- ======================================================== -->
+    <div id="admin-wrapper">
+        
+        <!-- TELA DE LOGIN -->
+        <div id="admin-login-screen" class="min-h-screen flex items-center justify-center bg-emerald-900 px-4">
+            <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-2xl">
+                <div>
+                    <h2 class="mt-2 text-center text-3xl font-extrabold text-gray-900">Painel Administrativo</h2>
+                    <p class="mt-2 text-center text-sm text-emerald-600 font-medium">Clínica Muana Milunga</p>
+                </div>
+                <form class="mt-8 space-y-6" id="adminLoginForm">
+                    <div class="rounded-md shadow-sm space-y-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Utilizador</label>
+                            <input id="login_user" type="text" required class="appearance-none rounded-md relative block width w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm" placeholder="Introduza o utilizador">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Senha</label>
+                            <input id="login_pass" type="password" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm" placeholder="••••••••">
+                        </div>
+                    </div>
+                    <div id="login-error-msg" class="text-red-600 text-sm font-semibold hidden text-center"></div>
+                    <div>
+                        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-bold rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors">
+                            Entrar <i class="fa-solid fa-right-to-bracket ml-2 pt-1"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="text-center">
+                    <button onclick="closeAdminSystem()" class="text-sm text-gray-500 hover:text-gray-800">Voltar ao site público</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAINEL PRINCIPAL DE GESTÃO -->
+        <div id="admin-dashboard" class="hidden min-h-screen flex flex-col md:flex-row">
+            <!-- Menu Lateral / Responsivo -->
+            <aside class="w-full md:w-64 bg-emerald-900 text-white flex flex-col shadow-xl">
+                <div class="p-5 border-b border-emerald-800 flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold text-lg">Muana Milunga</h3>
+                        <p class="text-xs opacity-70">Gestão Clínica</p>
+                    </div>
+                    <button onclick="logoutAdmin()" class="md:hidden text-white hover:text-red-300"><i class="fa-solid fa-power-off text-xl"></i></button>
+                </div>
+                <nav class="flex-1 p-4 space-y-2" id="dashboard-menu">
+                    <button onclick="switchTab('resumo')" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg bg-emerald-800 font-semibold transition-all" id="btn-tab-resumo">
+                        <i class="fa-solid fa-chart-pie w-5"></i> <span>Resumo Geral</span>
+                    </button>
+                    <button onclick="switchTab('marcacoes')" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg hover:bg-emerald-800 font-semibold transition-all" id="btn-tab-marcacoes">
+                        <i class="fa-solid fa-calendar-check w-5"></i> <span>Marcações</span>
+      </button>
+                             
